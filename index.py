@@ -1,41 +1,42 @@
 market_isim = 'Crew Bilişim'
 
-while(True):
-    print(market_isim + ' Hoşgeldiniz.')
-    bütce = int(input('Lütfen bir bütce belirtiniz: '))
-    print('Bütceniz {}₺ olarak düzenlendi.'.format(bütce))
-    print('                 ')
-    print('\n', 'Laptop : 1', '\n', 'Tablet : 2') 
-    print('                 ')
-    cevap = input( )
-    if (cevap == '1'):
-        print('          ')
-        print('▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬', '\n', '1.', 'Ürün 1 :', '35000₺', '\n', '2.', 'Ürün 2 :', '15000₺', '\n', '3.', 'Ürün 3 :', '25000₺', '\n', '4.', 'Ürün 4 :', '13000₺', '\n', '5.', 'Ürün 5 :', '22000₺')
-        print('▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬')
-        print("Lütfen bir ürün ıd'si belirtiniz.")
-        ürün = input( )
-        if (ürün == '1'):
-            ürün_fiyat = 35000
-            toplam = bütce - ürün_fiyat
-            print('Başarıyla {} nolu ürünü satın aldınız. Yeni bakiyeniz {}₺'.format(ürün, toplam))
-            print('▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬')
-        if (ürün == '2'):
-            ürün_fiyat = 15000
-            toplam = bütce - ürün_fiyat
-            print('Başarıyla {} nolu ürünü satın aldınız. Yeni bakiyeniz {}₺'.format(ürün, toplam))
-            print('▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬')
-        if (ürün == '3'):
-            ürün_fiyat = 25000
-            toplam = bütce - ürün_fiyat
-            print('Başarıyla {} nolu ürünü satın aldınız. Yeni bakiyeniz {}₺'.format(ürün, toplam))
-            print('▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬')
-        if (ürün == '4'):
-            ürün_fiyat = 13000
-            toplam = bütce - ürün_fiyat
-            print('Başarıyla {} nolu ürünü satın aldınız. Yeni bakiyeniz {}₺'.format(ürün, toplam))
-            print('▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬')
-        if (ürün == '5'):
-            ürün_fiyat = 25000
-            toplam = bütce - ürün_fiyat
-            print('Başarıyla {} nolu ürünü satın aldınız. Yeni bakiyeniz {}₺'.format(ürün, toplam))
-            print('▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬')
+def urun_sec():
+    print('Laptop : 1', '\n', 'Tablet : 2')
+    cevap = input("Lütfen bir ürün seçiniz (1-5): ")
+    return cevap
+
+def urun_detayi(urun_id):
+    urunler = {
+        '1': {'isim': 'Ürün 1', 'fiyat': 35000},
+        '2': {'isim': 'Ürün 2', 'fiyat': 15000},
+        '3': {'isim': 'Ürün 3', 'fiyat': 25000},
+        '4': {'isim': 'Ürün 4', 'fiyat': 13000},
+        '5': {'isim': 'Ürün 5', 'fiyat': 22000}
+    }
+    
+    return urunler.get(urun_id)
+
+def main():
+    while True:
+        print(market_isim + ' Hoşgeldiniz.')
+        bütce = int(input('Lütfen bir bütçe belirtiniz: '))
+        print('Bütçeniz {}₺ olarak düzenlendi.'.format(bütce))
+        print()
+        
+        urun_id = urun_sec()
+        urun = urun_detayi(urun_id)
+        
+        if urun:
+            urun_fiyat = urun['fiyat']
+            if bütce >= urun_fiyat:
+                toplam = bütce - urun_fiyat
+                print('Başarıyla {} satın aldınız. Yeni bakiyeniz {}₺'.format(urun['isim'], toplam))
+            else:
+                print('Üzgünüz, yeterli bütçeniz yok.')
+        else:
+            print('Geçersiz ürün seçimi.')
+
+        print('----------------------------------')
+
+if __name__ == "__main__":
+    main()
